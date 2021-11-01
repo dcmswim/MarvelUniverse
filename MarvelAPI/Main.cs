@@ -13,6 +13,7 @@ namespace MarvelUniverse.MarvelAPI
     {
         //string base_URL = "https://gateway.marvel.com/v1/public/characters";
         private readonly string publicKey = "8727b229c501ce42f0d084665cba3146";
+        //private key should be in a config file so that it can't be accessed! Located here temporarily for ease of access
         private readonly string privateKey = "4821819b4c2ad1067279a917c49920bc8dc953aa";
         private static HttpClient client = new HttpClient();
 

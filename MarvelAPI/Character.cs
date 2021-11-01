@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace MarvelUniverse.MarvelAPI
 {
+    //Marvel API returns a nested response with wrappers and containers
     public class CharacterDataWrapper
     {
         public int Code { get; set; }
