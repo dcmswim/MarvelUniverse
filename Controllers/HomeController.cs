@@ -1,4 +1,5 @@
-﻿using MarvelUniverse.Models;
+﻿using MarvelUniverse.MarvelAPI;
+using MarvelUniverse.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -18,15 +19,23 @@ namespace MarvelUniverse.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+            var marvel_obj = new Main();
+            CharacterDataWrapper CharacterModel = await marvel_obj.GetCharacters();
+            for (var i = 0; i < CharacterModel.Data.Results.Count; i++)
+            {
+                MarvelAPI.Character character = CharacterModel.Data.Results[i];
+                
+                
+                //Console.WriteLine(character.Name);
+                //Console.WriteLine(character.Description);
+            }
+
+            return View("Index");
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

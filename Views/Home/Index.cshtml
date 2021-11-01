@@ -1,8 +1,32 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model MarvelUniverse.MarvelAPI.Character;
+
+@{
+  ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Search bar to look up by name? -->
+<div class="md-form my-0">
+  <input class="form-control typeahead" type="text" autocomplete="off" name="searchString" placeholder="Search" aria-label="Search">
 </div>
+<button href="#" class="btn" type="submit">Search</button>
+
+
+<!--Card container-->
+<div class="container">
+  <div class="card-columns">
+    
+    @foreach (var item in Model)
+    {
+
+      <!-- Display Cards -->
+      <div class="card">
+        <div class="card-body" style="transform: rotate(0);">
+          <h3 class="card-title">@Model.Name</h3>
+          <p class="card-text">@Model.Description</p>
+        </div>
+      </div>
+      <!-- End Display Cards -->
+    }
+  </div>
+</div>
+<!-- End Card Container-->

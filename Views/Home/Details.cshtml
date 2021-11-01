@@ -1,0 +1,43 @@
+﻿@model MarvelUniverse.MarvelAPI.Character;
+
+@{
+  ViewData["Title"] = "Details";
+}
+
+@*
+  PSEUDO CODE:
+
+  foreach (var item in Model)
+  {
+     <!-- Display Cards -->
+      <div class="card">
+        <div class="card-body" style="transform: rotate(0);">
+        <img src = Model.Thumbnail alt = "image not displayed properly">
+          <h3 class="card-title">@Model.Name</h3>
+          <p class="card-text">@Model.Description</p>
+        </div>
+      </div>
+      <!-- End Display Cards -->
+
+  <!-- Comment Section at bottom of page -->
+  <form> 
+  @Html.HiddenFor(comment.Id)
+    <div class = "comment-body"> 
+     <div>
+      @Html.LabelFor(comment.Author)
+      @Html.TextBoxFor(comment.Author, new { class = "comment-author" })
+     </div>
+
+     <div>
+       @Html.LabelFor(comment.Body)
+       @Html.TextAreaFor(comment.Body, new { class = "comment-body" })
+     </div>
+    </div>
+
+    <div>
+      <button type = "submit"> Submit Comment </button>
+    </div>
+  </form>
+  }
+*@
+
