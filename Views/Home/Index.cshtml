@@ -1,4 +1,5 @@
-﻿@model MarvelUniverse.MarvelAPI.Character;
+﻿@model MarvelUniverse.MarvelAPI.CharacterDataWrapper;
+
 
 @{
   ViewData["Title"] = "Home Page";
@@ -16,14 +17,14 @@
 <div class="container">
   <div class="card-columns">
     
-    @foreach (var item in Model)
+    @foreach (var item in Model.Data.Results)
     {
 
       <!-- Display Cards -->
       <div class="card">
         <div class="card-body" style="transform: rotate(0);">
-          <h3 class="card-title">@Model.Name</h3>
-          <p class="card-text">@Model.Description</p>
+          <h3 class="card-title">@item.Name</h3>
+          <p class="card-text">@item.Description</p>
         </div>
       </div>
       <!-- End Display Cards -->
