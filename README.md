@@ -41,13 +41,13 @@ as reference classes/models were created in the program to model the desired dat
         //public EventList Events { get; set; }
         //public SeriesList Series { get; set; }
 
-    }
+    } 
+```
     
-    ```
     
-    Created Main.cs file to handle request url for API. 
-    
-    ```  public class Main
+Created Main.cs file to handle request url for API. 
+
+```  public class Main
     {
         //string base_URL = "https://gateway.marvel.com/v1/public/characters";
         private readonly string publicKey = "8727b229c501ce42f0d084665cba3146";
@@ -80,11 +80,11 @@ as reference classes/models were created in the program to model the desired dat
             return cdw;
 
         }
-        ```
+```
         
-        API parameters require timestamp, public key, and hash. Used md5 digest of timestamp + public key + private key to generate hash per API documentation.
+API parameters require timestamp, public key, and hash. Used md5 digest of timestamp + public key + private key to generate hash per API documentation.
         
-        ``` private static string CreateHash(string input)
+``` private static string CreateHash(string input)
         {
             var hash = String.Empty;
             using (MD5 md5Hash = MD5.Create())
@@ -101,11 +101,11 @@ as reference classes/models were created in the program to model the desired dat
                 hash = sBuilder.ToString();
             }
             return hash;
-            ```
+```        
             
-     Modified Controller to get information of character names and descriptions from character wrapper
+ Modified Controller to get information of character names and descriptions from character wrapper
      
-     ``` public async Task<IActionResult> IndexAsync()
+``` public async Task<IActionResult> IndexAsync()
         {
             var marvel_obj = new Main();
             CharacterDataWrapper CharacterModel = await marvel_obj.GetCharacters();
@@ -115,8 +115,88 @@ as reference classes/models were created in the program to model the desired dat
             }
 
             return View("Index");
+```     
+
+Used card container to display character names/descriptions on index page 
+
+```<!--Card container-->
+<div class="container">
+  <div class="card-columns">
+    
+    @foreach (var item in Model)
+    {
+
+      <!-- Display Cards -->
+      <div class="card">
+        <div class="card-body" style="transform: rotate(0);">
+          <h3 class="card-title">@Model.Name</h3>
+          <p class="card-text">@Model.Description</p>
+        </div>
+      </div>
+      <!-- End Display Cards -->
+    }
+  </div>
+</div>
+<!-- End Card Container-->
 ```
 
+Added class for comment properties 
+
+```public class Comment
+    {
+        public int Id { get; set; }
+        public string Author { get; set; }
+        public string Body { get; set; }
+        public int PostId { get; set; }
+    }
+
+    public class CommentViewModel
+    {
+        public int Id { get; set; }
+        public string Author { get; set; }
+        
+        [AllowHtml]
+        public string Body { get; set; }
+    }
+```
+
+Added Details page with comments section at bottom (note, this is pseudo code)
+
+```PSEUDO CODE:
+
+  foreach (var item in Model)
+  {
+     <!-- Display Cards -->
+      <div class="card">
+        <div class="card-body" style="transform: rotate(0);">
+        <img src = Model.Thumbnail alt = "image not displayed properly">
+          <h3 class="card-title">@Model.Name</h3>
+          <p class="card-text">@Model.Description</p>
+        </div>
+      </div>
+      <!-- End Display Cards -->
+
+  <!-- Comment Section at bottom of page -->
+  <form> 
+  @Html.HiddenFor(comment.Id)
+    <div class = "comment-body"> 
+     <div>
+      @Html.LabelFor(comment.Author)
+      @Html.TextBoxFor(comment.Author, new { class = "comment-author" })
+     </div>
+
+     <div>
+       @Html.LabelFor(comment.Body)
+       @Html.TextAreaFor(comment.Body, new { class = "comment-body" })
+     </div>
+    </div>
+
+    <div>
+      <button type = "submit"> Submit Comment </button>
+    </div>
+  </form>
+  }
+```
 
      
             
