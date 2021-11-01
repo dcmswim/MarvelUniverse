@@ -35,6 +35,28 @@ namespace MarvelUniverse.Controllers
             return View("Index");
         }
 
+        public ActionResult Comment(CommentViewModel viewModel)
+        {  
+            if (ModelState.IsValid)
+            {
+                var newComment = new Comment();
+                newComment.PostId = viewModel.Id;
+                newComment.Author = viewModel.Author;
+                newComment.Body = viewModel.Body;
+
+                //PSEUDO CODE:
+                //addComment.Create.(comment)
+                //addComment.SaveChanges();
+                //return addComment;
+            }
+            else
+            {
+               //return error message indicating comment form not filled out
+            }
+
+
+        }
+
         
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
