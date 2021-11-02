@@ -32,30 +32,31 @@ namespace MarvelUniverse.Controllers
                 //Console.WriteLine(character.Description);
             }
 
-            return View("Index");
+            return View("Index",CharacterModel);
         }
 
-        public ActionResult Comment(CommentViewModel viewModel)
-        {  
-            if (ModelState.IsValid)
-            {
-                var newComment = new Comment();
-                newComment.PostId = viewModel.Id;
-                newComment.Author = viewModel.Author;
-                newComment.Body = viewModel.Body;
+        // public ActionResult Comment(CommentViewModel viewModel)
+        // {  
+        //     if (ModelState.IsValid)
+        //     {
+        //         var newComment = new Comment();
+        //         newComment.PostId = viewModel.Id;
+        //         newComment.Author = viewModel.Author;
+        //         newComment.Body = viewModel.Body;
 
-                //PSEUDO CODE:
-                //addComment.Create.(comment)
-                //addComment.SaveChanges();
-                //return addComment;
-            }
-            else
-            {
-               //return error message indicating comment form not filled out
-            }
+        //         //PSEUDO CODE:
+        //         //addComment.Create.(comment)
+        //         //addComment.SaveChanges();
+        //         //return addComment;
+        //     }
+        //     else
+        //     {
+        //        //return error message indicating comment form not filled out
+        //        return new Comment();
+        //     }
 
 
-        }
+        // }
 
         
 
